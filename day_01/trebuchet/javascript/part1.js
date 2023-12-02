@@ -12,16 +12,20 @@ const fileContent = (fileName) => {
   }
 };
 
-const fileName = process.argv.at(2);
+const main = () => {
+  const fileName = process.argv.at(2);
 
-if (fileName) {
-  const lines = fileContent(fileName);
-  const result = lines
-    .map((line) => line.replace(/[^0-9]/g, ""))
-    .map((line) => Number(`${line.at(0) ?? ""}${line.at(-1) ?? ""}`))
-    .reduce((acc, cur) => acc + cur, 0);
+  if (fileName) {
+    const lines = fileContent(fileName);
+    const result = lines
+      .map((line) => line.replace(/[^0-9]/g, ""))
+      .map((line) => Number(`${line.at(0) ?? ""}${line.at(-1) ?? ""}`))
+      .reduce((acc, cur) => acc + cur, 0);
 
-  console.log(Number(result));
-} else {
-  console.error("Usage: node index.ts <filename>");
-}
+    console.log(Number(result));
+  } else {
+    console.error("Usage: node index.ts <filename>");
+  }
+};
+
+main();
